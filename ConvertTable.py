@@ -25,12 +25,13 @@ def csv_to_md(IN, OUT):
         writer.writelines(myfilein)
 
 
-def tsv_to_csv(IN, OUT):
-    df = pd.read_csv(IN, sep="\t")
-    df.to_csv(OUT)
+def pandas_switch(IN, OUT, separator_in="\t", separator_out=","):
+    df = pd.read_csv(IN, sep=separator_in)
+    df.to_csv(OUT, sep=separator_out)
 
-
-def pandas_to_yaml(df, OUT):
+    
+def pandas_to_yaml(IN, OUT, separator=","):
+    df = pd.read_csv(IN, sep=separator)
     with open(OUT, 'w') as outfile:
         yaml.dump(
             df.reset_index().to_dict(orient='records'),
@@ -40,5 +41,8 @@ def pandas_to_yaml(df, OUT):
         )
 
 
-
 # - - - - - - -  - - - - - - -  - - - - - - - RUN - - - - - - -  - - - - - - -  - - - - - - - 
+
+file_path_in = ""
+file_path_out = ""
+
