@@ -3,10 +3,10 @@ import yaml
 
 
 # - - - - - - -  - - - - - - -  - - - - - - - METHODS - - - - - - -  - - - - - - -  - - - - - - - 
-def csv_to_md(IN, OUT):
+def csv_to_md(path_in, path_out):
     myfilein = ''
 
-    with open(IN, 'r') as reader:
+    with open(path_in, 'r') as reader:
         myfilein = reader.readlines()
 
     count = 0
@@ -21,18 +21,18 @@ def csv_to_md(IN, OUT):
     headder = '|' + ('---|')*count + '\n'
     myfilein.insert(1, headder)
 
-    with open(OUT, 'w+') as writer:
+    with open(path_out, 'w+') as writer:
         writer.writelines(myfilein)
 
 
-def pandas_switch(IN, OUT, separator_in="\t", separator_out=","):
-    df = pd.read_csv(IN, sep=separator_in)
-    df.to_csv(OUT, sep=separator_out)
+def pandas_switch(path_in, path_out, separator_in="\t", separator_out=","):
+    df = pd.read_csv(path_in, sep=separator_in)
+    df.to_csv(path_out, sep=separator_out, index=False)
 
     
-def pandas_to_yaml(IN, OUT, separator=","):
-    df = pd.read_csv(IN, sep=separator)
-    with open(OUT, 'w') as outfile:
+def pandas_to_yaml(path_in, path_out, separator=","):
+    df = pd.read_csv(path_in, sep=separator)
+    with open(path_out, 'w') as outfile:
         yaml.dump(
             df.reset_index().to_dict(orient='records'),
             outfile,
@@ -43,6 +43,8 @@ def pandas_to_yaml(IN, OUT, separator=","):
 
 # - - - - - - -  - - - - - - -  - - - - - - - RUN - - - - - - -  - - - - - - -  - - - - - - - 
 
-file_path_in = ""
-file_path_out = ""
+file_path_in = "/home/solarlunix/Documents/test.csv"
+file_path_out = "/home/solarlunix/Documents/test.tsv"
+
+pandas_switch(file_path_in, file_path_out, separator_in=",", separator_out='\t')
 
