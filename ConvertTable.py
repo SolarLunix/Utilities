@@ -1,6 +1,10 @@
+from datetime import datetime
 import pandas as pd
 import yaml
+import json
 
+
+t0 = datetime.now()
 
 # - - - - - - -  - - - - - - -  - - - - - - - METHODS - - - - - - -  - - - - - - -  - - - - - - - 
 def csv_to_md(path_in, path_out):
@@ -41,10 +45,19 @@ def pandas_to_yaml(path_in, path_out, separator=","):
         )
 
 
+def pandas_to_json(df, path_out):
+    data = df.to_dict('index')
+    with open(path_out, 'w') as f:
+        json.dump(data, f)
+
+
 # - - - - - - -  - - - - - - -  - - - - - - - RUN - - - - - - -  - - - - - - -  - - - - - - - 
 
-file_path_in = "/home/solarlunix/Documents/test.csv"
-file_path_out = "/home/solarlunix/Documents/test.tsv"
+file_path_in = "/home/solarlunix/Documents/Code/PhD/Data/England/barcode.csv"
+file_path_out = "/home/solarlunix/Documents/Code/PhD/Data/England/barcode.json"
 
-pandas_switch(file_path_in, file_path_out, separator_in=",", separator_out='\t')
+df = pd.read_csv(file_path_in, index_col='id')
+pandas_to_json(df, file_path_out)
 
+# - - - - - - - END - - - - - - -
+print("Program Complete:", (datetime.now() - t0))
