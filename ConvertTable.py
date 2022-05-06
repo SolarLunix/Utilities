@@ -4,8 +4,6 @@ import yaml
 import json
 
 
-t0 = datetime.now()
-
 # - - - - - - -  - - - - - - -  - - - - - - - METHODS - - - - - - -  - - - - - - -  - - - - - - - 
 def csv_to_md(path_in, path_out):
     myfilein = ''
@@ -45,19 +43,23 @@ def pandas_to_yaml(path_in, path_out, separator=","):
         )
 
 
-def pandas_to_json(df, path_out):
+def pandas_to_json(path_in, path_out, separator=","):
+    df = pd.read_csv(path_in, sep=separator)
     data = df.to_dict('index')
     with open(path_out, 'w') as f:
         json.dump(data, f)
 
 
 # - - - - - - -  - - - - - - -  - - - - - - - RUN - - - - - - -  - - - - - - -  - - - - - - - 
+if __name__ == "__main__":
+    t0 = datetime.now()
 
-file_path_in = "/home/solarlunix/Documents/Code/PhD/Data/England/barcode.csv"
-file_path_out = "/home/solarlunix/Documents/Code/PhD/Data/England/barcode.json"
+    # - - - - - - - Variables - - - - - - - 
+    file_path_in = "/home/solarlunix/Documents/Code/PhD/Data/England/reads/metadata.tsv"
+    file_path_out = "/home/solarlunix/Documents/Code/PhD/Data/England/reads/metadata.yml"
 
-df = pd.read_csv(file_path_in, index_col='id')
-pandas_to_json(df, file_path_out)
+    # - - - - - - - Logic - - - - - - - 
+    pandas_to_yaml(file_path_in, file_path_out, '\t')
 
-# - - - - - - - END - - - - - - -
-print("Program Complete:", (datetime.now() - t0))
+    # - - - - - - - END - - - - - - -
+    print("Program Complete:", (datetime.now() - t0))
