@@ -53,8 +53,8 @@ def pandas_to_json(path_in, path_out, separator=","):
 def write_list(data: list, fname: str, sep: str) -> None:
     with open(fname, "w") as f:
         for item in data:
-            for part in item:
-                f.write(f"{part}{sep}")
+            for i, part in enumerate(item):
+                f.write(f"{sep}{part}") if i>0 else f.write(f"{part}")
             f.write("\n")
 
 
