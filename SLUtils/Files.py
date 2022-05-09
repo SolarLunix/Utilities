@@ -1,4 +1,4 @@
-def createDateFilename(path, name, extention):
+def create_date_filename(path, name, extention):
     import datetime
     import os
     now = datetime.datetime.now().strftime('%Y_%m_%d_%H%M')

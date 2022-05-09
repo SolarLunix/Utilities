@@ -13,4 +13,3 @@ def format():
             if new_file_name != file:
                 os.rename(os.path.join(dir, file), os.path.join(dir, new_file_name))
 
-format()

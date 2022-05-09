@@ -50,13 +50,21 @@ def pandas_to_json(path_in, path_out, separator=","):
         json.dump(data, f)
 
 
+def write_list(data: list, fname: str, sep: str) -> None:
+    with open(fname, "w") as f:
+        for item in data:
+            for part in item:
+                f.write(f"{part}{sep}")
+            f.write("\n")
+
+
 # - - - - - - -  - - - - - - -  - - - - - - - RUN - - - - - - -  - - - - - - -  - - - - - - - 
 if __name__ == "__main__":
     t0 = datetime.now()
 
     # - - - - - - - Variables - - - - - - - 
-    file_path_in = "/home/solarlunix/Documents/Code/PhD/Data/England/reads/metadata.tsv"
-    file_path_out = "/home/solarlunix/Documents/Code/PhD/Data/England/reads/metadata.yml"
+    file_path_in = "/home/solarlunix/Documents/Code/PhD/Data/AFBI/data/metadata.tsv"
+    file_path_out = "/home/solarlunix/Documents/Code/PhD/Data/AFBI/data/demux/metadata.yml"
 
     # - - - - - - - Logic - - - - - - - 
     pandas_to_yaml(file_path_in, file_path_out, '\t')
