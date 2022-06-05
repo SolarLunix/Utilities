@@ -66,6 +66,7 @@ if __name__ == "__main__":
     counts = {}
     filtered = 0
     count = 0
+    unique_species = 0
     for item in bc:
         if (item[2] != "None" and item[2] != "Blast ID") and float(item[4] if item[4] is not 'None' else 1)<=0.001:
             count += 1
@@ -78,11 +79,14 @@ if __name__ == "__main__":
                 genus = hold[1]
 
             if genus in counts.keys():
+                if item[2] not in counts[genus]["ID List"]:
+                    unique_species += 1
                 counts[genus]["Count"] += 1
                 counts[genus]["ID List"].append(item[2])
                 counts[genus]["Score List"].append(item[3])
                 counts[genus]["Expect List"].append(item[4])
             else:
+                unique_species += 1
                 counts.setdefault(genus, {
                     "Count": 1,
                     "ID List": [item[2]],
@@ -102,7 +106,7 @@ if __name__ == "__main__":
 
     total = count + filtered
     unique = len(counts.keys())
-    print(f"{barcode} \n\tSaved: {count}, Filtered: {filtered}, Total: {total}, Unique Genuses: {unique}")
+    print(f"{barcode} \n\tSaved: {count}, Filtered: {filtered}, Total: {total}, Unique Genuses: {unique}, Unique Species: {unique_species}")
 
     '''
     ncbi = NCBITaxa()
