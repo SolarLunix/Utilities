@@ -1,4 +1,4 @@
-def plotAccuracy(train, test):
+def plotAccuracy(train, test, save, show=True):
     import matplotlib as plt
 
     minplot = min(min(train), min(test))
@@ -10,10 +10,11 @@ def plotAccuracy(train, test):
     plt.ylim(minplot, 1.0)
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper left')
-    plt.savefig('/accuracy.png')  # change later to use Files
-    plt.show()
+    plt.savefig(save) 
+    if show:
+        plt.show()
 
-def plotLoss(train, test):
+def plotLoss(train, test, save, show=True):
     import matplotlib as plt
 
     plt.plot(train)
@@ -24,5 +25,6 @@ def plotLoss(train, test):
     plt.yscale('log')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper left')
-    plt.savefig('data/loss.png')  # Change later to Files
-    plt.show()
+    plt.savefig(save) 
+    if show:
+        plt.show()

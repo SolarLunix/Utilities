@@ -97,17 +97,8 @@ class MatrixSolver3Var():
 
 
 if __name__ == "__main__":
-    #var = [[1, 2, -3, 3], [0, -5, 5, 5], [0, 0, 6, -18]]
-    var = [[1, 2, -3, 3], [1, -11, 2, 40], [2, -22, 6, 74]]
-    sol = MatrixSolver3Var(var)
-    sol.transpose_line(1, 2)
-    sol.transform_line(1, "sub", sol.transform_line(0, "mult", 2, False))
-    sol.transform_line(2, "sub", sol.matrix[0])
-    sol.transform_line(2, "sub", sol.transform_line(1, "div", 2, False))
-
-    sol.transform_line(2, "div", -1)
-    sol.transform_line(1, "sub", sol.transform_line(2, "mult", sol.matrix[1][2], False))
-
-    sol.transpose_line(1, 2)
-    print(sol.math_history)
-    print("Expected z=-3, y=-4, x=2")
+    s1 = convolution_1Dshape(6000, 0, 1, 4, 1)
+    s2 = convolution_1Dshape(s1, 0, 1, 8, 1)
+    s3 = convolution_1Dshape(s2, 0, 1, 16, 1)
+    s4 = convolution_1Dshape(s3, 0, 1, 1, 1)
+    print(s1, s2, s3, s4)
