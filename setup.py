@@ -5,7 +5,7 @@ with open('requirements.txt') as r:
 
 setup(
     name="SLunixUtils", 
-    version="0.1.0", 
+    version="0.1.2", 
     install_requires=req, 
     include_package_data=True, 
     zip_safe=False, 
